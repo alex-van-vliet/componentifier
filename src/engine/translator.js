@@ -12,6 +12,8 @@ function generate(elements, components)
       {
         if ('class' in element.attribs && 'tw-name' in element.attribs)
         {
+          components[element.attribs['tw-name'].toString()]
+              = element.attribs['class'].split(' ');
           element.attribs['class'] = element.attribs['tw-name'];
           delete element.attribs['tw-name'];
         }
@@ -44,6 +46,7 @@ function translate(input)
 
   return {
     html: htmlparser.DomUtils.getInnerHTML({children: parsed}),
+    components,
   };
 }
 
