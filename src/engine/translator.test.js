@@ -14,13 +14,32 @@ import translate from './translator';
 // Remove tw-name
 
 it('replaces the class with the component name', () => {
-  let input = '<div class="text-red-500" tw-name="my-div"></div>';
+  let input =
+      '<div class="text-red-500" tw-name="my-div"></div>';
   let output = translate(input);
   expect(output.html).toBe('<div class="my-div"></div>');
 });
 
 it('generates a component with the classes', () => {
-  let input = '<div class="text-red-500" tw-name="my-div"></div>';
+  let input =
+      '<div class="text-red-500" tw-name="my-div"></div>';
   let output = translate(input);
-  expect(output.components).toStrictEqual({ 'my-div': ['text-red-500'] });
+  expect(output.components).toStrictEqual({'my-div': ['text-red-500']});
+});
+
+it('handles nested components', () => {
+  let input =
+      '<div class="text-red-500" tw-name="my-div">' +
+        '<div class="text-red-200" tw-name="my-nested-div">Test</div>' +
+      '</div>';
+  let output = translate(input);
+  expect(output.html).toBe(
+      '<div class="my-div">' +
+        '<div class="my-nested-div">Test</div>' +
+      '</div>'
+  );
+  expect(output.components).toStrictEqual({
+    'my-div': ['text-red-500'],
+    'my-nested-div': ['text-red-200'],
+  });
 });

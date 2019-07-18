@@ -18,6 +18,10 @@ function generate(elements, components)
           delete element.attribs['tw-name'];
         }
       }
+      if (element.children)
+      {
+        generate(element.children, components);
+      }
     }
   }
 }
