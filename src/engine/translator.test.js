@@ -1,5 +1,4 @@
 import translate from './translator';
-import InvalidHtmlException from './exceptions/InvalidHtmlException';
 
 // Simplest case
 // From:
