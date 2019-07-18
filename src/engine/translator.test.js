@@ -24,7 +24,9 @@ it('generates a component with the classes', () => {
   let input =
       '<div class="text-red-500" tw-name="my-div"></div>';
   let output = translate(input);
-  expect(output.components).toStrictEqual({'my-div': ['text-red-500']});
+  expect(output.components).toMatchObject({
+    'my-div': {default: ['text-red-500']},
+  });
 });
 
 it('handles nested components', () => {
@@ -38,9 +40,9 @@ it('handles nested components', () => {
         '<div class="my-nested-div">Test</div>' +
       '</div>'
   );
-  expect(output.components).toStrictEqual({
-    'my-div': ['text-red-500'],
-    'my-nested-div': ['text-red-200'],
+  expect(output.components).toMatchObject({
+    'my-div': {default: ['text-red-500']},
+    'my-nested-div': {default: ['text-red-200']},
   });
 });
 
@@ -54,8 +56,8 @@ it('handles neighbour components', () => {
       '<div class="my-div"></div>' +
       '<div class="my-next-div">Test</div>'
   );
-  expect(output.components).toStrictEqual({
-    'my-div': ['text-red-500'],
-    'my-next-div': ['text-red-200'],
+  expect(output.components).toMatchObject({
+    'my-div': {default: ['text-red-500']},
+    'my-next-div': {default: ['text-red-200']},
   });
 });

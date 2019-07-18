@@ -26,6 +26,19 @@ function generate(elements, components)
   }
 }
 
+function simplify(components)
+{
+  for (let component_id in components)
+  {
+    if (components.hasOwnProperty(component_id))
+    {
+      components[component_id] = {
+        default: components[component_id],
+      };
+    }
+  }
+}
+
 
 function translate(input)
 {
@@ -47,6 +60,7 @@ function translate(input)
 
   let components = {};
   generate(parsed, components);
+  simplify(components);
 
   return {
     html: htmlparser.DomUtils.getInnerHTML({children: parsed}),
