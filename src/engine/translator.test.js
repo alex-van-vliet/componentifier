@@ -43,3 +43,19 @@ it('handles nested components', () => {
     'my-nested-div': ['text-red-200'],
   });
 });
+
+it('handles neighbour components', () => {
+
+  let input =
+      '<div class="text-red-500" tw-name="my-div"></div>' +
+      '<div class="text-red-200" tw-name="my-next-div">Test</div>';
+  let output = translate(input);
+  expect(output.html).toBe(
+      '<div class="my-div"></div>' +
+      '<div class="my-next-div">Test</div>'
+  );
+  expect(output.components).toStrictEqual({
+    'my-div': ['text-red-500'],
+    'my-next-div': ['text-red-200'],
+  });
+});
