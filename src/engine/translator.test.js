@@ -10,9 +10,6 @@ import translate from './translator';
 //     @apply text-red-500;
 // }
 
-// Ignore elements without tw-name
-// Remove tw-name
-
 it('replaces the class with the component name', () => {
   let input =
       '<div class="text-red-500" tw-name="my-div"></div>';
