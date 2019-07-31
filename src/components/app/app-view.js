@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Controlled as CodeMirror} from 'react-codemirror2';
-import translate from '../../engine/translator';
-import cssTranslate from '../../engine/styles/css-translator';
+import translate from 'engine/translator';
+import cssTranslate from 'engine/styles/css-translator';
 
 import './app.sass';
 import 'codemirror/lib/codemirror.css';

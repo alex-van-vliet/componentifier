@@ -111,7 +111,8 @@
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
       "^assets/(.*)$": "<rootDir>/src/assets/$1",
-      "^components/(.*)$": "<rootDir>/src/components/$1"
+      "^components/(.*)$": "<rootDir>/src/components/$1",
+      "^engine/(.*)$": "<rootDir>/src/engine/$1"
     },
     "moduleFileExtensions": [
       "web.js",
