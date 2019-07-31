@@ -52,6 +52,7 @@
     "react-dom": "^16.8.6",
     "resolve": "1.10.0",
     "sass-loader": "7.1.0",
+    "scssfmt": "^1.0.7",
     "semver": "6.0.0",
     "style-loader": "0.23.1",
     "tailwindcss": "^1.0.5",

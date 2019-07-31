@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Controlled as CodeMirror} from 'react-codemirror2';
 import translate from 'engine/translator';
 import cssTranslate from 'engine/styles/css-translator';
+import scssfmt from 'scssfmt';
 
 import './app.sass';
 import 'codemirror/lib/codemirror.css';
@@ -24,7 +25,7 @@ function AppView() {
   });
 
   const output = translate(data);
-  const style = cssTranslate(output.components);
+  const style = scssfmt(cssTranslate(output.components));
 
   return (
     <div className={'App'}>
@@ -62,7 +63,7 @@ function AppView() {
           className={'App__style'}
           value={style}
           options={{
-            mode: 'css',
+            mode: 'text/x-scss',
             theme: 'material',
             lineNumbers: true,
             readOnly: true,
