@@ -34,7 +34,8 @@ function AppView() {
         options={{
           mode: 'htmlmixed',
           theme: 'material',
-          lineNumbers: true
+          lineNumbers: true,
+          lineWrapping: true
         }}
         onBeforeChange={(editor, data, value) => {
           setData(value);
@@ -53,7 +54,8 @@ function AppView() {
             mode: 'htmlmixed',
             theme: 'material',
             lineNumbers: true,
-            readOnly: true
+            readOnly: true,
+            lineWrapping: true
           }}
       />
       <CodeMirror
@@ -63,7 +65,8 @@ function AppView() {
             mode: 'css',
             theme: 'material',
             lineNumbers: true,
-            readOnly: true
+            readOnly: true,
+            lineWrapping: true
           }}
       />
     </div>
