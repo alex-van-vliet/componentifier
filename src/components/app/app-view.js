@@ -11,7 +11,17 @@ import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 
 function AppView() {
-  const [data, setData] = useState('');
+  const [data, setData] = useState(() => {
+    if (localStorage)
+    {
+      const input = localStorage.getItem('input');
+      if (input)
+      {
+        return input;
+      }
+    }
+    return '';
+  });
 
   const output = translate(data);
   const style = cssTranslate(output.components);
@@ -30,6 +40,10 @@ function AppView() {
           setData(value);
         }}
         onChange={(editor, data, value) => {
+          if (localStorage)
+          {
+            localStorage.setItem('input', value);
+          }
         }}
       />
       <CodeMirror
