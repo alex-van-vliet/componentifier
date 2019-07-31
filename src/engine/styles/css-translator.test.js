@@ -2,7 +2,7 @@ import translate from './css-translator';
 
 it('translates the default key of a component correctly', () => {
   let input = {
-    'my-div': {default: ['text-red-500']},
+    'my-div': {_default: {_default: ['text-red-500']}},
   };
   let output = translate(input);
   expect(output).toBe(
@@ -14,8 +14,8 @@ it('translates the default key of a component correctly', () => {
 
 it('translates several components', () => {
   let input = {
-    'my-div': {default: ['text-red-500']},
-    'my-nested-div': {default: ['text-red-200']},
+    'my-div': {_default: {_default: ['text-red-500']}},
+    'my-nested-div': {_default: {_default: ['text-red-200']}},
   };
   let output = translate(input);
   expect(output).toBe(
@@ -30,7 +30,7 @@ it('translates several components', () => {
 
 it('handles several classes', () => {
   let input = {
-    'my-div': {default: ['text-red-500', 'text-red-200']},
+    'my-div': {_default: {_default: ['text-red-500', 'text-red-200']}},
   };
   let output = translate(input);
   expect(output).toBe(

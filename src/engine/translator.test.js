@@ -22,7 +22,7 @@ it('generates a component with the classes', () => {
       '<div class="text-red-500" tw-name="my-div"></div>';
   let output = translate(input);
   expect(output.components).toMatchObject({
-    'my-div': {default: ['text-red-500']},
+    'my-div': {_default: {_default: ['text-red-500']}},
   });
 });
 
@@ -38,8 +38,8 @@ it('handles nested components', () => {
       '</div>'
   );
   expect(output.components).toMatchObject({
-    'my-div': {default: ['text-red-500']},
-    'my-nested-div': {default: ['text-red-200']},
+    'my-div': {_default: {_default: ['text-red-500']}},
+    'my-nested-div': {_default: {_default: ['text-red-200']}},
   });
 });
 
@@ -53,8 +53,8 @@ it('handles neighbour components', () => {
       '<div class="my-next-div">Test</div>'
   );
   expect(output.components).toMatchObject({
-    'my-div': {default: ['text-red-500']},
-    'my-next-div': {default: ['text-red-200']},
+    'my-div': {_default: {_default: ['text-red-500']}},
+    'my-next-div': {_default: {_default: ['text-red-200']}},
   });
 });
 
@@ -64,7 +64,7 @@ it('handles several classes', () => {
   let output = translate(input);
   expect(output.html).toBe('<div class="my-div"></div>');
   expect(output.components).toMatchObject({
-    'my-div': {default: ['text-red-500', 'text-red-200']},
+    'my-div': {_default: {_default: ['text-red-500', 'text-red-200']}},
   });
 });
 
@@ -74,7 +74,24 @@ it('can split one element into several components', () => {
   let output = translate(input);
   expect(output.html).toBe('<div class="my-div my-red-div"></div>');
   expect(output.components).toMatchObject({
-    'my-div': {default: ['text-center']},
-    'my-red-div': {default: ['text-red-500']}
+    'my-div': {_default: {_default: ['text-center']}},
+    'my-red-div': {_default: {_default: ['text-red-500']}},
+  });
+});
+
+it('handles pseudo-class variants', () => {
+  let input =
+      '<div class="hover:text-red-100 focus:text-red-200 active:text-red-300 group-hover:text-red-400 focus-within:text-red-500" tw-name="my-div">' +
+      '</div>';
+  let output = translate(input);
+  expect(output.html).toBe('<div class="my-div"></div>');
+  expect(output.components).toMatchObject({
+    'my-div': {
+      hover: {_default: ['text-red-100']},
+      focus: {_default: ['text-red-200']},
+      active: {_default: ['text-red-300']},
+      'group-hover': {_default: ['text-red-400']},
+      'focus-within': {_default: ['text-red-500']},
+    },
   });
 });

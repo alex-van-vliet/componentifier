@@ -6,11 +6,15 @@ function translate(components) {
     {
       let component = components[component_class];
 
-      if (component.hasOwnProperty('default'))
+      if (component.hasOwnProperty('_default'))
       {
-        output += '.' + component_class + '{';
-        output += '@apply ' + component['default'].join(' ') + ';';
-        output += '}';
+        const size = component['_default'];
+        if (size.hasOwnProperty('_default'))
+        {
+          output += '.' + component_class + '{';
+          output += '@apply ' + size['_default'].join(' ') + ';';
+          output += '}';
+        }
       }
     }
   }

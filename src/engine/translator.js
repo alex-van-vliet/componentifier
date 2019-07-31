@@ -57,7 +57,7 @@ function simplify(components)
     if (components.hasOwnProperty(component_id))
     {
       components[component_id] = {
-        default: components[component_id],
+        _default: {_default: components[component_id]},
       };
     }
   }
