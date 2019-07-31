@@ -67,3 +67,14 @@ it('handles several classes', () => {
     'my-div': {default: ['text-red-500', 'text-red-200']},
   });
 });
+
+it('can split one element into several components', () => {
+  let input =
+      '<div class="text-center , text-red-500" tw-name="my-div , my-red-div"></div>';
+  let output = translate(input);
+  expect(output.html).toBe('<div class="my-div my-red-div"></div>');
+  expect(output.components).toMatchObject({
+    'my-div': {default: ['text-center']},
+    'my-red-div': {default: ['text-red-500']}
+  });
+});
