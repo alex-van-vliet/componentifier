@@ -24,8 +24,30 @@ function AppView() {
     return '';
   });
 
-  const output = translate(data);
-  const style = scssfmt(cssTranslate(output.components));
+  let html, style;
+  try
+  {
+    const output = translate(data);
+    style = scssfmt(cssTranslate(output.components));
+    html = output.html;
+  }
+  catch (e)
+  {
+    console.error(e);
+    html = '';
+    style = '';
+  }
+  const display =
+      '<!DOCTYPE html>' +
+      '<html>' +
+        '<head>' +
+          '<link rel="stylesheet"' +
+          '      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.5/tailwind.min.css">' +
+        '</head>' +
+        '<body>' +
+          data +
+        '</body>' +
+      '</html>';
 
   return (
     <div className={'App'}>
@@ -48,9 +70,10 @@ function AppView() {
           }
         }}
       />
+      <iframe className={'App_display'} src={'data:text/html,' + display} sandbox={''}/>
       <CodeMirror
           className={'App__html'}
-          value={output.html}
+          value={html}
           options={{
             mode: 'htmlmixed',
             theme: 'material',

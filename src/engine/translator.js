@@ -121,16 +121,8 @@ function translate(input)
     return { html: null, components: null };
 
   let components = {};
-  try
-  {
-    generate(parsed, components);
-    simplify(components);
-  }
-  catch (e)
-  {
-    alert(e);
-    return {html: '', components: {}};
-  }
+  generate(parsed, components);
+  simplify(components);
 
   return {
     html: htmlparser.DomUtils.getInnerHTML({children: parsed}),
