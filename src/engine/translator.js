@@ -50,15 +50,53 @@ function generate(elements, components)
   }
 }
 
+function is_variant(variant)
+{
+  return variant in ['hover', 'focus', 'active', 'group-hover', 'focus-within'];
+}
+
 function simplify(components)
 {
+  const re_two_modifiers = /^([^:]*):([^:]*):(.*)$/;
+  const re_one_modifier = /^([^:]*):([^:]*)$/;
   for (let component_id in components)
   {
     if (components.hasOwnProperty(component_id))
     {
-      components[component_id] = {
-        _default: {_default: components[component_id]},
-      };
+      const classes = components[component_id];
+      let component = {};
+      for (let i = 0; i < classes.length; ++i)
+      {
+        let [size, variant, class_to_add] = ['_default', '_default', classes[i]];
+        const matches = classes[i].match(re_two_modifiers);
+        if (matches)
+        {
+          if (!is_variant(matches[2]))
+            throw new Error("Invalid variant " + matches[2]);
+          size = matches[1];
+          variant = matches[2];
+          class_to_add = matches[3];
+        }
+        else
+        {
+          const matches = classes[i].match(re_one_modifier);
+          if (matches)
+          {
+            if (is_variant(matches[1]))
+              variant = matches[1];
+            else
+              size = matches[1];
+            class_to_add = matches[2];
+          }
+        }
+
+        if (!(size in component))
+          component[size] = {};
+        if (!(variant in component[size]))
+          component[size][variant] = [];
+        component[size][variant].push(class_to_add);
+      }
+      components[component_id] = component;
     }
   }
 }
@@ -86,12 +124,13 @@ function translate(input)
   try
   {
     generate(parsed, components);
+    simplify(components);
   }
   catch (e)
   {
     alert(e);
+    return {html: '', components: {}};
   }
-  simplify(components);
 
   return {
     html: htmlparser.DomUtils.getInnerHTML({children: parsed}),
