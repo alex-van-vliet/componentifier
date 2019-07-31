@@ -1,0 +1,28 @@
+.App
+  width: 100vw
+  height: 100vh
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-template-rows: 1fr 1fr
+  grid-template-areas: "main html" "display style"
+
+  .App__main
+    grid-area: main
+    overflow-x: auto
+
+  .App_display
+    grid-area: display
+    overflow-x: auto
+    overflow-y: auto
+
+  .App__html
+    grid-area: html
+    overflow-x: auto
+
+  .App__style
+    grid-area: style
+    overflow-x: auto
+
+  .CodeMirror
+    height: 100%
+    width: 100%
