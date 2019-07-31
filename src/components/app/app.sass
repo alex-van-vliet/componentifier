@@ -1,26 +1,20 @@
 .App
-  text-align: center
+  width: 100vw
+  height: 100vh
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-template-rows: 1fr 1fr
+  grid-template-areas: "main html" "main style"
 
-.App-logo
-  animation: App-logo-spin infinite 20s linear
-  height: 40vmin
-  pointer-events: none
+  .App__main
+    grid-area: main
 
-.App-header
-  background-color: #282c34
-  min-height: 100vh
-  display: flex
-  flex-direction: column
-  align-items: center
-  justify-content: center
-  font-size: calc(10px + 2vmin)
-  color: white
+  .App__html
+    grid-area: html
 
-.App-link
-  color: #61dafb
+  .App__style
+    grid-area: style
 
-@keyframes App-logo-spin
-  from
-    transform: rotate(0deg)
-  to
-    transform: rotate(360deg)
+  .CodeMirror
+    height: 100%
+    width: 100%
