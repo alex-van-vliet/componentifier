@@ -27,3 +27,16 @@ it('translates several components', () => {
       '}'
   );
 });
+
+it('handles several classes', () => {
+  let input = {
+    'my-div': {default: ['text-red-500', 'text-red-200']},
+  };
+  let output = translate(input);
+  expect(output).toBe(
+      '.my-div{' +
+        '@apply text-red-500 text-red-200;' +
+      '}'
+  );
+});
+

@@ -9,7 +9,7 @@ function translate(components) {
       if (component.hasOwnProperty('default'))
       {
         output += '.' + component_class + '{';
-        output += '@apply ' + component['default'] + ';';
+        output += '@apply ' + component['default'].join(' ') + ';';
         output += '}';
       }
     }

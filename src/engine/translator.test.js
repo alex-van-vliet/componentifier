@@ -44,7 +44,6 @@ it('handles nested components', () => {
 });
 
 it('handles neighbour components', () => {
-
   let input =
       '<div class="text-red-500" tw-name="my-div"></div>' +
       '<div class="text-red-200" tw-name="my-next-div">Test</div>';
@@ -56,5 +55,15 @@ it('handles neighbour components', () => {
   expect(output.components).toMatchObject({
     'my-div': {default: ['text-red-500']},
     'my-next-div': {default: ['text-red-200']},
+  });
+});
+
+it('handles several classes', () => {
+  let input =
+      '<div class="text-red-500 text-red-200" tw-name="my-div"></div>';
+  let output = translate(input);
+  expect(output.html).toBe('<div class="my-div"></div>');
+  expect(output.components).toMatchObject({
+    'my-div': {default: ['text-red-500', 'text-red-200']},
   });
 });
