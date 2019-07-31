@@ -52,7 +52,7 @@ function generate(elements, components)
 
 function is_variant(variant)
 {
-  return variant in ['hover', 'focus', 'active', 'group-hover', 'focus-within'];
+  return ['hover', 'focus', 'active', 'group-hover', 'focus-within'].includes(variant);
 }
 
 function simplify(components)

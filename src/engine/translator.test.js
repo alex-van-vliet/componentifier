@@ -87,11 +87,13 @@ it('handles pseudo-class variants', () => {
   expect(output.html).toBe('<div class="my-div"></div>');
   expect(output.components).toMatchObject({
     'my-div': {
-      hover: {_default: ['text-red-100']},
-      focus: {_default: ['text-red-200']},
-      active: {_default: ['text-red-300']},
-      'group-hover': {_default: ['text-red-400']},
-      'focus-within': {_default: ['text-red-500']},
+      _default: {
+        hover: ['text-red-100'],
+        focus: ['text-red-200'],
+        active: ['text-red-300'],
+        'group-hover': ['text-red-400'],
+        'focus-within': ['text-red-500'],
+      },
     },
   });
 });
